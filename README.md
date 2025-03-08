@@ -1,84 +1,54 @@
-# Pneumonia Detection using VGG19 and ResNet50
+# Pneumonia Detection using Deep Learning
 
-## Overview
-Pneumonia is a severe respiratory disease that affects millions worldwide. Early and accurate detection is crucial for timely treatment. This project leverages deep learning techniques, particularly **VGG19** and **ResNet50**, to classify chest X-ray images as **Normal** or **Pneumonia**.
+This project implements pneumonia detection from chest X-ray images using VGG19 and ResNet50 models.
 
-## Problem Statement
-Traditional pneumonia detection through X-ray examination is time-consuming and dependent on expert radiologists. This project aims to automate the process using **Convolutional Neural Networks (CNNs)** to improve efficiency, accuracy, and accessibility.
+## Setup Instructions
 
-## Objectives
-- Preprocess and organize the chest X-ray dataset into **training, validation, and test** sets.
-- Implement **VGG19** and **ResNet50** models for pneumonia classification.
-- Evaluate model performance using **accuracy, precision, recall, and F1-score**.
-- Visualize learning curves to analyze model training and validation trends.
-- Compare the two models to determine the best-performing architecture for pneumonia detection.
+1. Install the required dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-## Dataset
-The dataset consists of labeled **chest X-ray images**, categorized into two classes:
-- **Normal**: Healthy lung X-rays.
-- **Pneumonia**: X-rays with pneumonia indications.
+2. Download the dataset from Kaggle and extract it. 
+Link for the dataset: https://www.kaggle.com/datasets/paultimothymooney/chest-xray-pneumonia
+The dataset should extracted in the following structure if not structure it as so:
+   ```
+   chest_xray/
+   ├── train/
+   │   ├── NORMAL/
+   │   └── PNEUMONIA/
+   ├── test/
+   │   ├── NORMAL/
+   │   └── PNEUMONIA/
+   └── val/
+       ├── NORMAL/
+       └── PNEUMONIA/
+   ```
 
-The dataset is structured into three folders:
-- **Train**: Used for model training.
-- **Validation**: Used for hyperparameter tuning.
-- **Test**: Used for final model evaluation.
+3. Run the main script:
+   ```bash
+   python main.py
+   ```
 
-## Methodology
-### 1. Data Preprocessing
-- Convert grayscale images to **RGB format** to align with pre-trained model requirements.
-- Resize images to **224x224 pixels**.
-- Apply **normalization** (scaling pixel values between 0 and 1).
-- Augment data with transformations like **random flipping, rotation, and zooming** to improve generalization.
+## Features
 
-### 2. Model Development
-Both **VGG19** and **ResNet50** architectures are used for classification:
-- **VGG19**: A deep CNN with a uniform structure, effective for extracting complex patterns.
-- **ResNet50**: A residual network designed to mitigate the vanishing gradient problem, improving training efficiency.
+- Automatic skipping of corrupted/truncated images
+- Model evaluation with precision, recall, F1 score, and accuracy
+- Confusion matrix visualization
+- Training history plots
+- Model comparison between VGG19 and ResNet50
 
-#### Model Architecture Modifications:
-- Removed top layers from pre-trained models.
-- Added a **Global Average Pooling (GAP)** layer.
-- Included **fully connected dense layers** with ReLU activation.
-- Final **sigmoid activation layer** for binary classification.
+## Model Architecture
 
-### 3. Training and Evaluation
-- Models trained using the **Adam optimizer**.
-- Implemented **early stopping and learning rate scheduling** to optimize training.
-- Evaluated using:
-  - **Accuracy**
-  - **Precision**
-  - **Recall**
-  - **F1-score**
-  - **Confusion Matrix Analysis**
+Both models use transfer learning with pre-trained weights from ImageNet:
+- Base models: VGG19 and ResNet50
+- Additional layers: Global Average Pooling and Dense layers
+- Binary classification output with sigmoid activation
 
-## Results and Insights
-### Performance Metrics
-| Model   | Accuracy | Precision | Recall | F1 Score |
-|---------|---------|----------|--------|----------|
-| VGG19   | 85.58%  | 87.00%   | 93.59% | 89.02%   |
-| ResNet50| 78.37%  | 84.74%   | 79.74% | 82.17%   |
+## Output
 
-- **VGG19 performed better** in accuracy, precision, and recall, making it a more suitable model for pneumonia detection.
-- **ResNet50 struggled** with training but still showed promising results.
-- **Confusion matrix analysis** highlighted a few misclassifications, indicating room for further improvement.
-
-## Installation & Usage
-### Prerequisites
-Ensure you have the following installed:
-- Python 3.9+
-- TensorFlow
-- Keras
-- NumPy
-- Matplotlib
-- Seaborn
-- Scikit-learn
-
-## Future Enhancements
-- **Fine-tuning** the models by unfreezing additional layers.
-- **Using ensemble learning** to combine predictions from multiple architectures.
-- **Expanding the dataset** to improve generalizability.
-- **Deploying as a web or mobile application** for real-world usage.
-- **Integrating Explainable AI (XAI)** techniques like Grad-CAM for interpretability.
-
-## Conclusion
-This project demonstrates the effectiveness of deep learning models for automated pneumonia detection using chest X-rays. The **VGG19 model outperformed ResNet50**, making it the preferred choice for deployment in a real-world setting. Future work can enhance model accuracy, scalability, and integration into medical diagnostics.
+The script will generate:
+- Evaluation metrics for both models
+- Confusion matrices
+- Training history plots
+- Saved model files (.h5 format)
