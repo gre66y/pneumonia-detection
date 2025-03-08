@@ -73,25 +73,6 @@ Ensure you have the following installed:
 - Seaborn
 - Scikit-learn
 
-### Steps to Run
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/yourusername/Pneumonia-Detection.git
-   cd Pneumonia-Detection
-   ```
-2. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
-3. Train the models:
-   ```bash
-   python main.py
-   ```
-4. Evaluate model performance:
-   ```bash
-   python evaluation.py
-   ```
-
 ## Future Enhancements
 - **Fine-tuning** the models by unfreezing additional layers.
 - **Using ensemble learning** to combine predictions from multiple architectures.
